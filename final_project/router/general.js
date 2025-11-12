@@ -17,7 +17,7 @@ public_users.post("/register", (req,res) => {
  const userExists = users.find((user) => user.username === username);
 
  if (userExists) {
-    return res.status(409).jsaon({ message: "User already exists"});
+    return res.status(409).json({ message: "User already exists"});
  }
 
  users.push({ "username": username, "password": password });
