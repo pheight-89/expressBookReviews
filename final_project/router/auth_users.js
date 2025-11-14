@@ -4,13 +4,22 @@ let books = require("./booksdb.js");
 const regd_users = express.Router();
 
 let users = [];
+const secretKey = "1k73JushBN18kls";
 
 const isValid = (username)=>{ //returns boolean
 //write code to check is the username is valid
+    if (!username || username.trim() === ""){
+        return false;
+    }
+
+    let userExists = users.some((user) => user.username === username);
+    return userExists;
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
 //write code to check if username and password match the one we have in records.
+    let matchingUsers = users.filter((user)=> (user.username === username && user.password === password));
+    return matchingUsers.length > 0;
 }
 
 //only registered users can login
