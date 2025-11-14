@@ -5,6 +5,7 @@ const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
 
 const app = express();
+const secretKey = '1k73JushBN18kls';
 
 app.use(express.json());
 
@@ -20,7 +21,7 @@ const token = req.session.authorization?.accessToken;
         if (err) {
           res.status(401).json({ message: "token expired. please login again." }); 
         } else {
-          req.username = decoded.username;
+          req.username = decoded.data;
           next();
         }
       });
